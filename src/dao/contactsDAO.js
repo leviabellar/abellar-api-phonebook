@@ -63,4 +63,17 @@ export default class ContactsDAO {
             return { error: e }
         }
     }
+
+    static async deleteContact(id) {
+        try {
+            const deleteResponse = await contacts.deleteOne({
+                _id: ObjectId(id),
+            })
+
+            return deleteResponse
+        } catch (e) {
+            console.error(`Cannot delete comment: ${e}`)
+            return { error: e }
+        }
+    }
 }

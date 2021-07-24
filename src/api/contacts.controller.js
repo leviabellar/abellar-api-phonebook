@@ -1,4 +1,5 @@
 import ContactsDAO from '../dao/contactsDAO.js'
+import { ObjectId } from 'bson'
 
 export default class ContactsController {
     static async apiGetContacts(req, res, next) {
@@ -27,6 +28,14 @@ export default class ContactsController {
     }
 
     static async apiDeleteContact(req, res, next) {
-        
+        try {
+            const contactId = req.params['_id']
+            const deleteResponse = await ContactsDAO.deleteContact(
+                ObjectId(contactId)
+            )
+            res.json({ status: "success", response: deleteResponse })
+        } catch (e) {
+            res.status(500).json({ e })
+        }
     }
 }
