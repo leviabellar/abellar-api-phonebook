@@ -38,4 +38,21 @@ export default class ContactsController {
             res.status(500).json({ e })
         }
     }
+
+    static async apiUpdateContact(req, res, next) {
+        try {
+            const contact = {
+                last_name: req.body.last_name,
+                first_name: req.body.first_name,
+                phone_numbers: req.body.phone_numbers
+            }
+            const contactId = req.params['_id']
+            const updateResponse = await ContactsDAO.updateContact(
+                ObjectId(contactId), contact
+            )
+            res.json({ status: "success", response: updateResponse })
+        } catch (e) {
+            res.status(500).json({ e })
+        }
+    }
 }

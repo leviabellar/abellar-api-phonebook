@@ -72,7 +72,20 @@ export default class ContactsDAO {
 
             return deleteResponse
         } catch (e) {
-            console.error(`Cannot delete comment: ${e}`)
+            console.error(`Unable to delete contact: ${e}`)
+            return { error: e }
+        }
+    }
+
+    static async updateContact(id, contact) {
+        try {
+            const updateResponse = await contacts.updateOne({
+                _id: ObjectId(id),
+            }, {$set: contact})
+
+            return updateResponse
+        } catch (e) {
+            console.error(`Unable to update contact: ${e}`)
             return { error: e }
         }
     }

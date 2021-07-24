@@ -10,5 +10,6 @@ router
 router
   .route('/:_id')
   .delete(ContactsCtrl.apiDeleteContact)
+  .put(ContactsCtrl.apiUpdateContact)
 
 export default router
