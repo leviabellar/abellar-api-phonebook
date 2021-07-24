@@ -1,4 +1,4 @@
-import ContactsDAO from '../dao/contactsDAO'
+import ContactsDAO from '../dao/contactsDAO.js'
 
 export default class ContactsController {
     static async apiGetContacts(req, res, next) {

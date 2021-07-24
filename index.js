@@ -1,1 +1,2 @@
-exports = module.exports = require("./src")
+
+import './src/index.js'

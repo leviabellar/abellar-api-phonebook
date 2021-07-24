@@ -22,7 +22,7 @@ export default class ContactsDAO {
     static async getContacts({
         filters = null,
         skip = 0,
-        limit = null,
+        limit = 0,
     } = {}) {
         let queryParams = {}
         if (filters) {

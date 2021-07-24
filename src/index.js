@@ -5,7 +5,7 @@ import ContactsDAO from './dao/contactsDAO.js'
 const port = process.env.PORT || 8000
 
 MongoClient.connect(
-    process.env.PB_DB_URI,
+    'mongodb+srv://user001:user001-mongodb-basics@practice.54zqw.mongodb.net/test?retryWrites=true&w=majority',
     { useNewUrlParser: true },
 )
   .catch(err => {
