@@ -1,4 +1,5 @@
 import { ObjectId } from "bson"
+import { response } from "express"
 
 let contacts
 let pbook
@@ -51,6 +52,15 @@ export default class ContactsDAO {
             console.error(
                 `Unable to convert cursor to array or problem counting documents, ${e}`
             )
+        }
+    }
+
+    static async addContact(contact) {
+        try {
+            return await contacts.insertOne(contact)
+        } catch (e) {
+            console.error(`Unable to post contact: ${e}`)
+            return { error: e }
         }
     }
 }

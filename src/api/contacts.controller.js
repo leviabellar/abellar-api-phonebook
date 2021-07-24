@@ -10,4 +10,23 @@ export default class ContactsController {
         }
         res.json(response)
     }
+
+    static async apiPostContact(req, res, next) {
+        try {
+            const contact = {
+                last_name: req.body.last_name,
+                first_name: req.body.first_name,
+                phone_numbers: req.body.phone_numbers
+            }
+    
+            await ContactsDAO.addContact(contact)
+            res.json({ status: "success", inserted: contact })
+        } catch (e) {
+            res.status(500).json({ e })
+        }
+    }
+
+    static async apiDeleteContact(req, res, next) {
+        
+    }
 }
