@@ -4,11 +4,13 @@ import ContactsCtrl from './contacts.controller.js'
 const router = new Router()
 
 router
-  .route('/').get(ContactsCtrl.apiGetContacts)
+  .route('/')
+  .get(ContactsCtrl.apiGetContacts)
   .post(ContactsCtrl.apiPostContact)
 
 router
   .route('/:_id')
+  .get(ContactsCtrl.apiGetContactById)
   .delete(ContactsCtrl.apiDeleteContact)
   .put(ContactsCtrl.apiUpdateContact)
 

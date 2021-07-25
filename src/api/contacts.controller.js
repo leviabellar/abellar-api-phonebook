@@ -55,4 +55,19 @@ export default class ContactsController {
             res.status(500).json({ e })
         }
     }
+
+    static async apiGetContactById(req, res, next) {
+        try {
+            let id = req.params._id || {}
+            let contact = await ContactsDAO.getContactById(id)
+            if (!contact) {
+                res.status(404).json( {error: "Not found"} )
+                return
+            }
+            res.json({ contact })
+        } catch (e) {
+            console.log(`api, ${e}`)
+            res.status(500).json({ error: e })
+        }
+    }
 }

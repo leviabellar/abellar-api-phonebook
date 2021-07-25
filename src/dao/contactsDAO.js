@@ -1,5 +1,5 @@
 import { ObjectId } from "bson"
-import { response } from "express"
+import { json, response } from "express"
 
 let contacts
 let pbook
@@ -87,6 +87,22 @@ export default class ContactsDAO {
         } catch (e) {
             console.error(`Unable to update contact: ${e}`)
             return { error: e }
+        }
+    }
+
+    static async getContactById(id) {
+        try {
+            const pipeline = [
+                {
+                    $match: {
+                        _id: ObjectId(id)
+                    }
+                }
+            ]
+            return await contacts.aggregate(pipeline).next()
+        } catch (e) {
+            console.error(`Something went wrong in getMovieByID: ${e}`)
+            return null
         }
     }
 }
