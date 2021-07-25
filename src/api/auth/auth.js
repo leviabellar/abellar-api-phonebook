@@ -37,4 +37,24 @@ async (email, password, done) => {
     }
 }))
 
+passport.use('login', new localStrategy(
+    {
+        usernameField: 'email',
+        passwordField: 'password',
+    },
+    async (email, password, done) => {
+        try {
+            let result = await UsersDAO.checkEmailIfExist(email)
+            if (!result) return done(null, false, { message: 'Email not found' })
+            bcrypt.compare(password, result.password, (e, match) => {
+                if(!match) return done(null, false, { message: 'Wrong password' })
+                return done(null, match, { message: 'Login successfully' })
+            })
+
+        } catch (e) {
+            return done(e)
+        }
+    }
+))
+
 export default passport
